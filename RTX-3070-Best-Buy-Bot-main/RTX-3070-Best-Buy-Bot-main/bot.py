@@ -24,12 +24,11 @@ driver.get(RTX3070LINK1)
 isComplete = False
 
 
-
 while not isComplete:
     # find add to cart button
     try:
         atcBtn = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.CLASS_NAME, "primary_RXOwf"))
+            EC.element_to_be_clickable((By.CLASS_NAME, "addToCartButton"))
         )
     except:
         print("Add to cart button not found")
@@ -47,9 +46,13 @@ while not isComplete:
         # go to cart and begin checkout as guest
         driver.get("https://www.bestbuy.ca/en-ca/basket")
 
+        time.sleep(10)
+
         checkoutBtn = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div/div[4]/div[2]/div[2]/section/div/main/section/section[2]/div[2]/div/a"))
+            EC.presence_of_element_located((By.XPATH, "//*[@id='root']/div/div[4]/div[2]/div[2]/section/div/main/section/section[2]/div[2]/div/a"))
         )
+
+
         checkoutBtn.click()
         print("Successfully added to cart - beginning check out")
 
